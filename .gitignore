@@ -1,0 +1,4 @@
+node_modules/
+layers/*
+.env
+test/*
