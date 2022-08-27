@@ -1,8 +1,7 @@
 import { ethers } from 'ethers';
 // import abi from "./abi.json";
-import abiNouns from "./abi2.json";
+import abiNouns from "../abis/abi2.json";
 require('dotenv').config({ path: require('find-config')('.env') });
-
 
 export interface NounsTokenMetadata {
     name: string;
@@ -25,7 +24,7 @@ const addr = '0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03';
 
 const contract =
     new ethers.Contract(addr, abiNouns, wallet);
-const read = async () => {
+const readNounsDataURI = async () => {
     console.log("calling");
 
     const res = await contract.dataURI(0);
@@ -45,4 +44,4 @@ const write = async () => {
     console.log(res);
 };
 
-read();
+readNounsDataURI();

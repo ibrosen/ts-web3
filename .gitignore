@@ -2,3 +2,5 @@ node_modules/
 layers/*
 .env
 test/*
+.DS_store
+src/**/out/

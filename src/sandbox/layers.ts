@@ -6,7 +6,7 @@ import fs from 'fs';
 import https from 'https';
 import path from 'path';
 import sharp from 'sharp';
-import abiNouns from "./abi2.json";
+import abiNouns from "../abis/abi2.json";
 
 require('dotenv').config({ path: require('find-config')('.env') });
 
@@ -39,8 +39,6 @@ const read = async () => {
         Buffer.from(res.substring(29), 'base64').toString('ascii'),
     );
     console.log(data);
-    // console.log(JSON.parse(atob(res)));
-    // console.log(Buffer.from(res, 'base64'));
 };
 
 const write = async () => {

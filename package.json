@@ -1,9 +1,9 @@
 {
-    "name": "frontend",
+    "name": "ibrosen-web3-tools",
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "start": "npx ts-node src/index.ts"
+        "snapshot": "npx ts-node src/snapshot/index.ts"
     },
     "dependencies": {
         "@types/merge-images": "^1.2.1",
@@ -15,7 +15,8 @@
         "keccak256": "^1.0.6",
         "merge-images": "^2.0.0",
         "merkletreejs": "^0.2.32",
-        "sharp": "^0.30.7"
+        "sharp": "^0.30.7",
+        "web3": "^1.7.5"
     },
     "devDependencies": {
         "@types/sharp": "^0.30.5",
