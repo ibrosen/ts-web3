@@ -4,7 +4,7 @@ import Web3 from 'web3';
 require('dotenv').config({ path: require('find-config')('.env') });
 
 const snapshotOwners = async (addr: string, blockNum: number, filePrefix: string, rpcProviderUrl: string, fallbackTotalSupply?: number) => {
-    // set provider for all later instances to use
+    // Instantiate contract
     const provider = new Web3.providers.HttpProvider(rpcProviderUrl);
     const web3 = new Web3(provider);
     const contract = new web3.eth.Contract([
@@ -42,7 +42,6 @@ const snapshotOwners = async (addr: string, blockNum: number, filePrefix: string
         },], addr, {});
 
     let totalSupply: number;
-
     try {
         totalSupply = +(await contract.methods.totalSupply().call({}, blockNum));
 
