@@ -3,7 +3,6 @@ import Web3 from 'web3';
 
 require('dotenv').config({ path: require('find-config')('.env') });
 
-
 const snapshotOwners = async (addr: string, blockNum: number, filePrefix: string, rpcProviderUrl: string, fallbackTotalSupply?: number) => {
     // set provider for all later instances to use
     const provider = new Web3.providers.HttpProvider(rpcProviderUrl);
