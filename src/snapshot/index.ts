@@ -76,4 +76,6 @@ const snapshotOwners = async (addr: string, blockNum: number, filePrefix: string
     }
 };
 
-snapshotOwners('0x8E3CD80a9D54a564ad12773406E5e0150a73cf4e', 15415224, 'test-collection', 'https://eth-mainnet.g.alchemy.com/v2/' + process.env.ALCHEMY_MAINNET_KEY);
+//15415224
+
+snapshotOwners('0x8E3CD80a9D54a564ad12773406E5e0150a73cf4e', 15436955, 'good-minds-honouraries', 'https://eth-mainnet.g.alchemy.com/v2/' + process.env.ALCHEMY_MAINNET_KEY);

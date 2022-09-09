@@ -4,3 +4,4 @@ layers/*
 test/*
 .DS_store
 src/**/out/
+src/**/*.json

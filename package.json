@@ -3,7 +3,8 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "snapshot": "npx ts-node src/snapshot/index.ts"
+        "snapshot": "npx ts-node src/snapshot/index.ts",
+        "minters": "npx ts-node src/minters/index.ts"
     },
     "dependencies": {
         "@types/merge-images": "^1.2.1",

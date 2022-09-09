@@ -10,13 +10,4 @@ The code is fairly simple. It uses the `web3` package as this allows you to spec
 
 For collections that have a `totalSupply` exposed, it'll use that to find the size of the collection, otherwise you'll need to provide it yourself.
 
-Before running the code, you'll need to sign up for a free Alchemy (or any other RPC provider) API key, which you can do [here](https://www.alchemy.com/pricing).
-
-Add this key to a `.env` file in the *root* of this repo, like so:
-
-```
-ALCHEMY_MAINNET_KEY=<your key>
-```
-
-After that, just run `yarn` or `npm install` to install the packages, and then `yarn snapshot` or `npm run snapshot`!
-
+Before running the code, check out the root [README Getting Started](../../README.md#Getting-Started)'s
