@@ -1,5 +1,6 @@
 import fs from 'fs';
 import Web3 from 'web3';
+import { sleep } from '../utils';
 
 require('dotenv').config({ path: require('find-config')('.env') });
 
@@ -56,26 +57,29 @@ const snapshotOwners = async (addr: string, blockNum: number, filePrefix: string
         }
     }
 
-    const owners: Record<string, string> = {};
-    const filePath = `${__dirname}/out/${filePrefix}-snapshot.json`;
+    let owners: Record<string, string> = {};
     const outDirPath = __dirname + "/out";
-    for (let i = 0; i < totalSupply; i++) {
+    const filePath = `${outDirPath}/${filePrefix}-snapshot.json`;
+    let start = 0;
+    if (fs.existsSync(filePath)) {
+        owners = JSON.parse(fs.readFileSync(filePath, { encoding: 'utf8' }))
+        start = Object.keys(owners).length
+        console.log(`Found ${start} already saved, skipping`)
+    }
+    for (let i = start; i < totalSupply; i++) {
         // Add a 100ms buffer in between calls, in order to not run over Alchemy's free tier
         // max compute usage per second
-        setTimeout(async () => {
-            owners[i] = `${(await contract.methods.ownerOf(i).call({}, blockNum))}`;
-            process.stdout.write(`⛳️ Found owner for tokenID:${i}\r`);
+        owners[i] = `${(await contract.methods.ownerOf(i).call({}, blockNum))}`;
+        process.stdout.write(`⛳️ Found owner for tokenID:${i}\r`);
 
-            // If this is the last call, write
-            if (Object.values(owners).length === totalSupply) {
-                if (!fs.existsSync(outDirPath)) fs.mkdirSync(outDirPath);
-                fs.writeFileSync(filePath, JSON.stringify(owners));
-                console.log(`\n🏄‍♂️ Successfully saved the file to "${filePath}"`);
-            }
-        }, i * 100);
+        // If this is the last call, write
+        if (Object.values(owners).length % 500 === 0 || Object.values(owners).length === totalSupply) {
+            if (!fs.existsSync(outDirPath)) fs.mkdirSync(outDirPath);
+            fs.writeFileSync(filePath, JSON.stringify(owners));
+            console.log(`\n🏄‍♂️ Successfully saved the file to "${filePath}"`);
+        }
+        await sleep(100)
     }
 };
 
-//15415224
-
-snapshotOwners('0x8E3CD80a9D54a564ad12773406E5e0150a73cf4e', 15436955, 'good-minds-honouraries', 'https://eth-mainnet.g.alchemy.com/v2/' + process.env.ALCHEMY_MAINNET_KEY);
+snapshotOwners('0xda64C62254E6ffE6783Dd00472559A1744512846', 15826796, 'good-minds', 'https://eth-mainnet.g.alchemy.com/v2/' + process.env.ALCHEMY_MAINNET_KEY);
